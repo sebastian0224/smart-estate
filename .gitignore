@@ -1,0 +1,10 @@
+node_modules
+.next
+data
+.env
+.env.*
+!.env.example
+*.log
+server/uploads/*
+!server/uploads/[1-9].jpg
+!server/uploads/1[0-5].jpg
