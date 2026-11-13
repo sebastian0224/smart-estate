@@ -22,14 +22,14 @@ export default function Bar() {
   const path = usePathname();
   return (
     <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
-        <Link href="/" className="shrink-0 text-lg">smart estate</Link>
-        <nav className="mx-auto flex gap-5 text-sm">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3 sm:grid sm:h-16 sm:grid-cols-[1fr_auto_1fr] sm:px-6 sm:py-0">
+        <Link href="/" className="text-lg">Smart Estate</Link>
+        <nav className="order-last flex w-full justify-center gap-4 text-sm sm:order-none sm:w-auto sm:gap-5">
           {links.map(([href, label]) => (
             <Link key={href} href={href} className={path === href ? "border-b border-zinc-900" : "text-zinc-500"}>{label}</Link>
           ))}
         </nav>
-        <div className="flex shrink-0 items-center gap-2 text-sm">
+        <div className="ml-auto flex items-center justify-end gap-2 text-sm sm:ml-0">
           <SignedIn>
             <Avatar />
           </SignedIn>

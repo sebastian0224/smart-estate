@@ -32,7 +32,7 @@ export default function Ficha() {
         <h1 className="text-2xl">{p.titulo}</h1>
         <p className="mt-2">{plata(p.precio)}</p>
         <p className="text-sm text-zinc-500">{p.area} m² · {p.direccion}</p>
-        <p className="mt-2 text-sm">{p.destacado ? "Destacado" : "Sin destacar"}</p>
+        {p.destacado ? <p className="mt-2 text-sm">Destacado</p> : null}
         <p className="mt-4 text-sm">{p.descripcion}</p>
         <div className="mt-6 border-t border-zinc-200 pt-4 text-sm">
           <p className="font-medium">{p.agente}</p>

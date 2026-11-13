@@ -3,7 +3,7 @@ import { esES } from "@clerk/localizations";
 import Bar from "./bar";
 import "./globals.css";
 
-export const metadata = { title: "smart estate" };
+export const metadata = { title: "Smart Estate" };
 
 export default function RootLayout({ children }) {
   return (

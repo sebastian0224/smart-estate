@@ -192,7 +192,7 @@ export default function Perfil() {
       {msg ? <p className="mt-3 text-sm text-zinc-500">{msg}</p> : null}
       {dueno ? (
         <section className="mt-8">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-lg">Mis inmuebles</h2>
             <button type="button" onClick={abrirNuevo} className="rounded-full bg-zinc-900 px-4 py-2 text-sm text-white">Crear publicación</button>
           </div>
@@ -209,13 +209,14 @@ export default function Perfil() {
                   </div>
                   <p className="text-sm text-zinc-500">{plata(p.precio)}</p>
                 </Link>
-                <div className="mt-2 flex gap-2 text-sm">
+                <div className="mt-2 flex flex-wrap gap-2 text-sm">
                   <button type="button" className="rounded-full border border-zinc-300 px-3 py-1" onClick={() => abrirEdit(p)}>Editar</button>
                   {p.destacado ? null : <button type="button" className="rounded-full border border-zinc-300 px-3 py-1" onClick={() => destacar(p.id)}>Destacar</button>}
                   <button type="button" className="rounded-full border border-zinc-300 px-3 py-1" onClick={() => borrar(p.id)}>Borrar</button>
                 </div>
               </article>
             ))}
+            {!mias.length ? <p className="text-sm text-zinc-500">Todavía no publicaste inmuebles</p> : null}
           </div>
         </section>
       ) : (
@@ -229,7 +230,7 @@ export default function Perfil() {
               </div>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <p className="text-sm">{p.titulo}</p>
-                <span className={p.destacado ? "rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white" : "rounded-full border border-zinc-300 px-2 py-0.5 text-xs text-zinc-500"}>{p.destacado ? "Destacado" : "Sin destacar"}</span>
+                {p.destacado ? <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white">Destacado</span> : null}
               </div>
               <p className="text-sm text-zinc-500">{plata(p.precio)}</p>
             </Link>
@@ -254,11 +255,15 @@ export default function Perfil() {
             </select>
             <input name="direccion" value={form.direccion} onChange={campo} required maxLength={120} placeholder="Dirección" className="rounded-lg border border-zinc-200 px-3 py-2 text-sm" />
             <textarea name="descripcion" value={form.descripcion} onChange={campo} required maxLength={500} placeholder="Descripción" className="rounded-lg border border-zinc-200 px-3 py-2 text-sm" />
-            <input name="fotos" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={verFotos} className="text-sm" />
-            <p className="text-xs text-zinc-500">Máximo 4 fotos. Precio y área solo números.</p>
+            <label className="w-fit cursor-pointer rounded-full border border-zinc-300 px-4 py-2 text-sm">Elegir fotos
+              <input name="fotos" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={verFotos} className="hidden" />
+            </label>
             {[...actuales, ...previews].length ? <div className="flex flex-wrap gap-2">{[...actuales, ...previews].map((src) => <img key={src} src={src} alt="" className="h-16 w-16 rounded-lg object-cover" />)}</div> : null}
             {error ? <p className="text-sm text-red-600">{error}</p> : null}
-            <button className="w-fit rounded-full bg-zinc-900 px-4 py-2 text-sm text-white">{edit ? "Guardar" : "Publicar"}</button>
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => { soltarNuevas(); setActuales([]); setAbierto(false); }} className="rounded-full border border-zinc-300 px-4 py-2 text-sm">Cancelar</button>
+              <button className="rounded-full bg-zinc-900 px-4 py-2 text-sm text-white">{edit ? "Guardar" : "Publicar"}</button>
+            </div>
           </form>
         </div>
       ) : null}
